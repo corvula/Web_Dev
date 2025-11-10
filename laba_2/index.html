@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Секундомір Pro</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f2f2f2;
+      margin-top: 50px;
+    }
+    h1 { color: #333; }
+    #time {
+      font-size: 3em;
+      margin: 20px 0;
+      background: white;
+      display: inline-block;
+      padding: 10px 30px;
+      border-radius: 15px;
+      border: 2px solid #46233f;
+    }
+    button {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 1em;
+      border-radius: 10px;
+      border: none;
+      background: #54185e;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    button:hover { background: #54185e; }
+    button:disabled { background: #aaa; cursor: not-allowed; }
+    table {
+      width: 60%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background: white;
+    }
+    th, td {
+      border: 1px solid #54185e;
+      padding: 8px;
+    }
+    th {
+      background-color: #54185e;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>⏱️ Секундомір Pro</h1>
+  <div id="time">00:00:00.000</div><br>
+  <button id="startBtn">Start</button>
+  <button id="pauseBtn" disabled>Pause</button>
+  <button id="resumeBtn" disabled>Resume</button>
+  <button id="lapBtn" disabled>Lap</button>
+  <button id="resetBtn">Reset</button>
+
+  <table id="lapsTable">
+    <thead>
+      <tr>
+        <th>№</th>
+        <th>Час кола</th>
+        <th>Різниця від попереднього</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script src="stopwatch_pro.js"></script>
+  <script>
+    const sw = new Stopwatch();
+    const timeDisplay = document.getElementById('time');
+    const startBtn = document.getElementById('startBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const resumeBtn = document.getElementById('resumeBtn');
+    const lapBtn = document.getElementById('lapBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const lapsTable = document.querySelector('#lapsTable tbody');
+
+    let interval;
+
+    function updateTime() {
+      timeDisplay.textContent = Stopwatch.format(sw.getTime());
+    }
+
+    startBtn.onclick = () => {
+      sw.start();
+      interval = setInterval(updateTime, 100);
+      startBtn.disabled = true;
+      pauseBtn.disabled = false;
+      lapBtn.disabled = false;
+    };
+
+    pauseBtn.onclick = () => {
+      sw.pause();
+      pauseBtn.disabled = true;
+      resumeBtn.disabled = false;
+      lapBtn.disabled = true;
+      clearInterval(interval);
+      updateTime();
+    };
+
+    resumeBtn.onclick = () => {
+      sw.resume();
+      resumeBtn.disabled = true;
+      pauseBtn.disabled = false;
+      lapBtn.disabled = false;
+      interval = setInterval(updateTime, 100);
+    };
+
+    resetBtn.onclick = () => {
+      sw.reset();
+      clearInterval(interval);
+      updateTime();
+      lapsTable.innerHTML = '';
+      startBtn.disabled = false;
+      pauseBtn.disabled = true;
+      resumeBtn.disabled = true;
+      lapBtn.disabled = true;
+    };
+
+    lapBtn.onclick = () => {
+      sw.lap();
+      renderLaps();
+    };
+
+    function renderLaps() {
+      const laps = sw.getLaps();
+      lapsTable.innerHTML = laps.map(lap => `
+        <tr>
+          <td>${lap.id}</td>
+          <td>${Stopwatch.format(lap.timeMs)}</td>
+          <td>${Stopwatch.format(lap.deltaMs)}</td>
+        </tr>
+      `).join('');
+    }
+  </script>
+</body>
+</html>

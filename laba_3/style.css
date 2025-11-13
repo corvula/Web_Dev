@@ -1,0 +1,129 @@
+:root {
+  --bg: #f4f4f4;
+  --text: #222;
+  --accent: #4caf50;
+  --error: #e74c3c;
+}
+
+body.dark {
+  --bg: #121212;
+  --text: #f4f4f4;
+  --accent: #66bb6a;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  transition: background 0.3s, color 0.3s;
+}
+
+.container {
+  background: white;
+  color: var(--text);
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  width: 320px;
+  transition: background 0.3s, color 0.3s;
+}
+
+body.dark .container {
+  background: #1e1e1e;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1em;
+}
+
+input:focus {
+  outline: 2px solid var(--accent);
+  border-color: var(--accent);
+}
+
+.tips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.tip-btn {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.tip-btn.active {
+  background: #2e7d32;
+}
+
+.error {
+  color: var(--error);
+  font-size: 0.85em;
+  height: 1em;
+}
+
+.results {
+  margin-top: 20px;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+
+.results div {
+  margin: 8px 0;
+  font-size: 1.1em;
+}
+
+.actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#reset {
+  background: #d9534f;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.theme-switch {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+#themeToggle {
+  transform: scale(1.3);
+}

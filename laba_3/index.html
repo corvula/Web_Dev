@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Калькулятор чайових</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>💰 Калькулятор чайових</h1>
+
+    <div class="input-group">
+      <label for="bill">Сума рахунку (грн)</label>
+      <input type="text" id="bill" placeholder="0.00" inputmode="decimal">
+      <small class="error" aria-live="polite"></small>
+    </div>
+
+    <div class="input-group">
+      <label>Відсоток чайових</label>
+      <div class="tips">
+        <button class="tip-btn" data-tip="5">5%</button>
+        <button class="tip-btn" data-tip="10">10%</button>
+        <button class="tip-btn" data-tip="15">15%</button>
+        <button class="tip-btn" data-tip="20">20%</button>
+        <button class="tip-btn custom">Custom</button>
+        <input type="text" id="customTip" placeholder="%" hidden>
+      </div>
+      <small class="error" aria-live="polite"></small>
+    </div>
+
+    <div class="input-group">
+      <label for="people">Кількість людей</label>
+      <input type="number" id="people" min="1" value="1">
+      <small class="error" aria-live="polite"></small>
+    </div>
+
+    <div class="results">
+      <div>Чайові загалом: <span id="tipTotal">0.00</span> грн</div>
+      <div>Загальна сума: <span id="total">0.00</span> грн</div>
+      <div>На 1 людину: <span id="perPerson">0.00</span> грн</div>
+    </div>
+
+    <div class="actions">
+      <button id="reset">Скинути</button>
+      <label class="theme-switch">
+        🌞<input type="checkbox" id="themeToggle">🌙
+      </label>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

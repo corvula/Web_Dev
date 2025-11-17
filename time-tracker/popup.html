@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      width: 350px;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      transition: all 0.3s ease;
+    }
+
+    body.light {
+      background: #ffffff;
+      color: #333333;
+    }
+
+    body.dark {
+      background: #1a1a1a;
+      color: #e0e0e0;
+    }
+    
+    .header {
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid;
+    }
+    
+    body.light .header {
+      background: #f5f5f5;
+      border-bottom-color: #e0e0e0;
+    }
+    
+    body.dark .header {
+      background: #2a2a2a;
+      border-bottom-color: #404040;
+    }
+    
+    .header h1 {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    
+    .theme-toggle {
+      background: none;
+      border: 2px solid;
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    body.light .theme-toggle {
+      border-color: #333;
+      color: #333;
+    }
+    
+    body.light .theme-toggle:hover {
+      background: #333;
+      color: white;
+    }
+    
+    body.dark .theme-toggle {
+      border-color: #e0e0e0;
+      color: #e0e0e0;
+    }
+    
+    body.dark .theme-toggle:hover {
+      background: #e0e0e0;
+      color: #1a1a1a;
+    }
+    
+    .content {
+      padding: 20px;
+    }
+    
+    .site-section {
+      margin-bottom: 25px;
+    }
+    
+    .label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      opacity: 0.7;
+    }
+    
+    .site-name {
+      font-size: 16px;
+      font-weight: 600;
+      padding: 10px;
+      border-radius: 6px;
+      word-break: break-all;
+    }
+    
+    body.light .site-name {
+      background: #f5f5f5;
+    }
+    
+    body.dark .site-name {
+      background: #2a2a2a;
+    }
+    
+    .time-display {
+      text-align: center;
+      margin: 25px 0;
+    }
+    
+    .time-values {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 10px;
+    }
+    
+    .time-unit {
+      text-align: center;
+    }
+    
+    .time-number {
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1;
+    }
+    
+    body.light .time-number {
+      color: #4CAF50;
+    }
+    
+    body.dark .time-number {
+      color: #66bb6a;
+    }
+    
+    .time-label {
+      font-size: 11px;
+      opacity: 0.6;
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .limit-section {
+      margin-bottom: 20px;
+    }
+    
+    .limit-inputs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    
+    .input-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .input-group label {
+      font-size: 11px;
+      margin-bottom: 4px;
+      opacity: 0.7;
+    }
+    
+    .input-group input {
+      padding: 10px;
+      font-size: 14px;
+      border: 2px solid;
+      border-radius: 6px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    
+    body.light .input-group input {
+      background: #ffffff;
+      border-color: #e0e0e0;
+      color: #333;
+    }
+    
+    body.light .input-group input:focus {
+      outline: none;
+      border-color: #4CAF50;
+    }
+    
+    body.dark .input-group input {
+      background: #2a2a2a;
+      border-color: #404040;
+      color: #e0e0e0;
+    }
+    
+    body.dark .input-group input:focus {
+      outline: none;
+      border-color: #66bb6a;
+    }
+    
+    button {
+      width: 100%;
+      padding: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 8px;
+    }
+    
+    .set-btn {
+      color: white;
+    }
+    
+    body.light .set-btn {
+      background: #4CAF50;
+    }
+    
+    body.light .set-btn:hover {
+      background: #45a049;
+    }
+    
+    body.dark .set-btn {
+      background: #66bb6a;
+    }
+    
+    body.dark .set-btn:hover {
+      background: #81c784;
+    }
+    
+    .reset-btn {
+      color: white;
+    }
+    
+    body.light .reset-btn {
+      background: #f44336;
+    }
+    
+    body.light .reset-btn:hover {
+      background: #da190b;
+    }
+    
+    body.dark .reset-btn {
+      background: #ef5350;
+    }
+    
+    body.dark .reset-btn:hover {
+      background: #e57373;
+    }
+    
+    .warning {
+      padding: 12px;
+      border-radius: 6px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+    
+    body.light .warning {
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeaa7;
+    }
+    
+    body.dark .warning {
+      background: #4a3f00;
+      color: #ffd54f;
+      border: 1px solid #6d5200;
+    }
+    
+    .limit-info {
+      font-size: 12px;
+      text-align: center;
+      opacity: 0.7;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body class="light">
+  <div class="header">
+    <h1>Трекер часу</h1>
+    <button class="theme-toggle" id="themeToggle">Темна тема</button>
+  </div>
+
+  <div class="content">
+    <div class="site-section">
+      <div class="label">Поточний сайт</div>
+      <div class="site-name" id="siteName">Завантаження...</div>
+    </div>
+
+    <div class="time-display">
+      <div class="time-values">
+        <div class="time-unit">
+          <div class="time-number" id="hours">0</div>
+          <div class="time-label">годин</div>
+        </div>
+        <div class="time-unit">
+          <div class="time-number" id="minutes">0</div>
+          <div class="time-label">хвилин</div>
+        </div>
+        <div class="time-unit">
+          <div class="time-number" id="seconds">0</div>
+          <div class="time-label">секунд</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="limit-section">
+      <div class="label">Встановити ліміт</div>
+      <div class="limit-inputs">
+        <div class="input-group">
+          <label>Години</label>
+          <input type="number" id="limitHours" value="0" min="0" max="23">
+        </div>
+        <div class="input-group">
+          <label>Хвилини</label>
+          <input type="number" id="limitMinutes" value="0" min="0" max="59">
+        </div>
+        <div class="input-group">
+          <label>Секунди</label>
+          <input type="number" id="limitSeconds" value="0" min="0" max="59">
+        </div>
+      </div>
+      <button class="set-btn" id="setBtn">Встановити ліміт</button>
+      <div class="limit-info" id="limitInfo">Ліміт не встановлено</div>
+    </div>
+
+    <div id="warning" style="display:none;" class="warning">
+      Ліміт перевищено!
+    </div>
+
+    <button class="reset-btn" id="resetBtn">Скинути час</button>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
